@@ -34,3 +34,5 @@ Entry.init(
         sequelize
     }
 )
+
+module.exports = Entry;

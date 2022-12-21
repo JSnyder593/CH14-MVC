@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const { User, Event } = require('../../models');
+const { User, Entry } = require('../../models');
 const bcrypt = require('bcrypt');
 
 
-//gets all user data
+//gets all users
 router.get('/', (req, res => {
     res.json(userData)
 }).catch(err => res.status(500).json({ msg: "something went wrong", err })
@@ -25,3 +25,8 @@ router.post('/', (req, res => {
         res.status(500).json({ err })
     })
 }))
+
+//gets user by id
+router.get('/id', (req, res) => {
+
+})

@@ -23,7 +23,15 @@ Comment.init(
             get() {
                 return moment(this.getDataValue('createdAt').format('DD/MM/YYY h:mm:ss'))
             }
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            get() {
+                return moment(this.getDataValue('createdAt').format('DD/MM/YYY h:mm:ss'))
+            }
         }
     }, {
     sequelize
 });
+
+module.exports = Comment;
