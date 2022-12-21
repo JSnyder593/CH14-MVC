@@ -1,37 +1,42 @@
-const { Model, DataTypes, NOW } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection')
-const moment = require('moment');
 
-class Comment extends Model { };
+
+class Comment extends Model { }
 
 Comment.init(
     {
-        body: {
-            type: DataTypes.TEXT,
-            allowNull: false
-        },
-        date: {
-            type: DataTypes.DATE,
-            defaultValue: NOW,
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
             allowNull: false,
-            validate: {
-                isDate: true
+            autoIncrement: true
+          },
+          user_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+              model: 'user',
+              key: 'id'
             }
-        },
-        createdAt: {
-            type: DataTypes.DATE,
-            get() {
-                return moment(this.getDataValue('createdAt').format('DD/MM/YYY h:mm:ss'))
+          },
+          post_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+              model: 'post',
+              key: 'id'
             }
-        },
-        updatedAt: {
-            type: DataTypes.DATE,
-            get() {
-                return moment(this.getDataValue('createdAt').format('DD/MM/YYY h:mm:ss'))
-            }
+          },
+        content: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
-    }, {
-    sequelize
-});
+    },
+    {
+
+        sequelize
+
+    });
 
 module.exports = Comment;

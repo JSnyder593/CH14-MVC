@@ -4,12 +4,13 @@ const { User, Entry, Comment } = require('../../Models')
 router.get('/:id', (req, res) => {
     Entry.findByPk(req.params.id, {
         include: Comment
-    })
-}).then((entry) => {
-    res.json(entry)
-}).catch((err) => {
-    console.log(err);
-    res.status(500).json({ err: err })
+    }).then((entry) => {
+        res.json(entry)
+    }).catch((err) => {
+        console.log(err);
+        res.status(500).json({ err: err })
+    });
+
 });
 
 router.post('/', async (req, res) => {

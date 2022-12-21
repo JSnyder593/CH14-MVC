@@ -2,22 +2,13 @@ const User = require('./user');
 const Entry = require('./entry');
 const Comment = require('./comment');
 
-User.hasMany(Entry, {
-    onDelete: "CASCADE"
-});
-
+User.hasMany(Entry);
 Entry.belongsTo(User);
 
-User.hasMany(Comment, {
-    onDelete: "CASCADE"
-});
-
+User.hasMany(Comment);
 Comment.belongsTo(User);
 
-Entry.hasMany(Comment, {
-    onDelete: "CASCADE"
-});
-
+Entry.hasMany(Comment);
 Comment.belongsTo(Entry);
 
-module.exports = { User, Entry, Comment }
+module.exports = { User:User, Entry:Entry, Comment:Comment }
