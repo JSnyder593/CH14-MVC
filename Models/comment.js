@@ -1,18 +1,29 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes, NOW } = require('sequelize');
+const sequelize = require('../config/connection')
+const moment = require('moment');
 
-class Comment extends Model {};
+class Comment extends Model { };
 
 Comment.init(
     {
+        body: {
+            type: DataTypes.TEXT,
+            allowNull: false
+        },
         date: {
-            type: DataTypes.Date,
+            type: DataTypes.DATE,
+            defaultValue: NOW,
             allowNull: false,
             validate: {
-                isDate:true
+                isDate: true
             }
         },
-        description: {
-            type: DataTypes.STRING(120)
+        createdAt: {
+            type: DataTypes.DATE,
+            get() {
+                return moment(this.getDataValue('createdAt').format('DD/MM/YYY h:mm:ss'))
+            }
         }
-    }
-)
+    }, {
+    sequelize
+});
